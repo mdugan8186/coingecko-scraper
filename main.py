@@ -6,6 +6,7 @@ Main script to fetch top cryptocurrencies from CoinGecko API and save to CSV.
 
 import csv
 from modules.coingecko_api import get_top_100_cryptos
+from modules.postprocess import clean_crypto_data
 from pathlib import Path
 from datetime import datetime
 
@@ -63,7 +64,8 @@ def main():
         print("❌ No data fetched. Exiting.")
         return
 
-    cleaned_data = extract_fields(raw_data)
+    extracted_data = extract_fields(raw_data)
+    cleaned_data = clean_crypto_data(extracted_data)
     save_to_csv(cleaned_data, OUTPUT_PATH)
     print(f"✅ Data saved to: {OUTPUT_PATH.resolve()}")
 
