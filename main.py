@@ -9,10 +9,19 @@ from modules.coingecko_api import get_top_100_cryptos
 from modules.postprocess import clean_crypto_data
 from pathlib import Path
 from datetime import datetime
+import json
 
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 OUTPUT_PATH = Path(f"output/top_100_crypto_{timestamp}.csv")
+
+
+def load_config(path="config.json"):
+    """
+    Loads configuration from a JSON file.
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def extract_fields(crypto_data):
@@ -58,7 +67,12 @@ def save_to_csv(data, output_file):
 
 def main():
     print("📡 Fetching data from CoinGecko API...")
-    raw_data = get_top_100_cryptos()
+    config = load_config()
+    raw_data = get_top_100_cryptos(
+        vs_currency=config["currency"],
+        per_page=config["per_page"],
+        page=config["page"]
+    )
 
     if not raw_data:
         print("❌ No data fetched. Exiting.")
