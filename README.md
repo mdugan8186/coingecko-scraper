@@ -1,115 +1,115 @@
-# CoinGecko Cryptocurrency Scraper
+# CoinGecko API Scraper
 
-Fetch the top 100 cryptocurrencies by market cap from the CoinGecko public API and export structured, cleaned data to CSV. This script is built as a modular, production-ready Python scraper for portfolio and freelance use.
+_Retrieves top cryptocurrencies → structured CSVs with price and market data._
 
----
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Last Commit](https://img.shields.io/github/last-commit/mdugan8186/coingecko-scraper)
 
-## 📌 Features
-
-- Retrieves top cryptocurrencies using the [CoinGecko API](https://www.coingecko.com/en/api/documentation)
-- Extracts key metrics:
-  - Name
-  - Symbol
-  - Current Price (USD)
-  - Market Cap
-  - 24h Volume
-  - 24h Price Change (%)
-- Cleans and formats data (e.g., rounding, comma formatting)
-- Saves results to a timestamped CSV in the `output/` folder
-- Loads configurable parameters from `config.json`
-- Sample cleaned output provided for preview
+A Python scraper that queries the **CoinGecko public API** for cryptocurrency market data.  
+It retrieves the top N coins by market cap, parses the JSON response, and exports clean CSVs for analysis.
 
 ---
 
-## ⚙️ Configuration
+## 🔍 Key Features
 
-You can customize the request using `config.json`:
-
-```json
-{
-  "currency": "usd",
-  "per_page": 100,
-  "page": 1
-}
-```
-
-Change the `"currency"` field to `"eur"`, `"btc"`, etc. as supported by the CoinGecko API.
+- Retrieves top cryptocurrencies by market cap (default: 100).
+- Structured fields exported to CSV: `name`, `symbol`, `current_price`, `market_cap`, `volume_24h`, `price_change_24h_pct`.
+- Lightweight (uses Python + requests/httpx).
+- Error handling for network failures and API rate limits.
+- Easy to extend with custom fields or output formats.
 
 ---
 
-## 🚀 Usage
+## ⚙️ Quick Start
 
-1. Clone the repository:
+### Prerequisites
+
+- Python **3.10+**
+- Git
+
+### Installation
 
 ```bash
+# 1) Clone
 git clone https://github.com/mdugan8186/coingecko-scraper.git
 cd coingecko-scraper
-```
 
-2. Install dependencies:
+# 2) (optional) Virtual environment
+python -m venv .venv
+# macOS/Linux:
+source .venv/bin/activate
+# Windows:
+.venv\Scripts\activate
 
-```bash
+# 3) Dependencies
 pip install -r requirements.txt
 ```
 
-3. Run the script:
+### Run
 
 ```bash
-python3 main.py
+python main.py
 ```
 
-4. Find the output CSV in the `output/` folder with a timestamped filename like:
-
-```
-top_100_crypto_2025-07-29_22-38-18.csv
-```
+- Outputs a CSV at: `output/top_100_crypto_2025-07-29_22-38-18.csv`
+- Each run creates a **timestamped CSV** (e.g., `top_100_crypto_2025-07-29_22-38-18.csv`). Older files are not overwritten.
 
 ---
 
-## 📂 Project Structure
+## 📁 Output
+
+- **Timestamped CSVs** saved in `output/` (e.g., `top_100_crypto_2025-07-29_22-38-18.csv`).
+
+**Columns**
 
 ```
-coingecko-scraper/
-├── main.py
-├── config.json
-├── modules/
-│   ├── coingecko_api.py
-│   └── postprocess.py
-├── output/
-│   └── top_100_crypto_<timestamp>.csv
-├── samples/
-│   └── sample_output.csv
-├── requirements.txt
-└── README.md
+name, symbol, current_price, market_cap, volume_24h, price_change_24h_pct
 ```
 
 ---
 
-## 📊 Sample Output
+## 🎥 Demo
 
-Preview the cleaned data format in:
+Example of the scraper output:
 
-📁 `samples/sample_output.csv`
+![CoinGecko Output](media/coingecko-scraper.png)
 
----
-
-## 🧰 Technologies Used
-
-- Python 3.13
-- `requests` for API calls
-- Standard libraries (`csv`, `json`, `pathlib`)
-- Modular file structure for maintainability
+The full dataset is saved as: [`output/top_100_crypto_2025-07-29_22-38-18.csv`](output/top_100_crypto_2025-07-29_22-38-18.csv)
 
 ---
 
-## 👨‍💻 Author
+## 🧪 Testing & Dev Notes
 
-**Michael Dugan**  
-Built for portfolio and freelance demonstration.  
-GitHub: [mdugan8186](https://github.com/mdugan8186)
+See **TESTING.md** for a step-by-step sanity flow, API maintenance notes, and data-quality checks.
 
 ---
 
-## 📝 License
+## 🛠️ Tech Stack
 
-This project is open-source and free to use for educational or personal use.
+- **Python** (3.10+)
+- **requests / httpx** for API calls
+- **CSV** outputs (pandas optional for further cleaning)
+
+---
+
+## ⚖️ Legal & Ethical Use
+
+This scraper uses the **CoinGecko public API** and is intended for **educational and demonstration purposes only**.  
+Please review and comply with the [CoinGecko API Terms of Service](https://www.coingecko.com/en/api) before using this project beyond small-scale testing or portfolio demonstration.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See [`LICENSE`](./LICENSE).
+
+---
+
+## 👤 About
+
+**Mike Dugan** — Python Web Scraper & Automation Developer
+
+- GitHub: [@mdugan8186](https://github.com/mdugan8186)
+- Portfolio Website: https://mdugan8186.github.io/scraping-portfolio/
+- Email: **mdugan8186.work@gmail.com**
